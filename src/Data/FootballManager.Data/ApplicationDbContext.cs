@@ -30,6 +30,9 @@
 
         public DbSet<Leagues> Leagues { get; set; }
 
+        public DbSet<Match> Matchs { get; set; }
+
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

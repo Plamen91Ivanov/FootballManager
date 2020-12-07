@@ -1,6 +1,7 @@
 ﻿namespace FootballManager.Data.Models
 {
     using FootballManager.Data.Common.Models;
+    using System;
 
     public class Games : BaseDeletableModel<int>
     {
@@ -15,5 +16,7 @@
         public double HomeTeamCoefficient { get; set; }
 
         public double AwayTeamCoefficient { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }
