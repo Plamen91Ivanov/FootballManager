@@ -60,11 +60,13 @@
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
+            services.AddScoped<MatchService, MatchService>();
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IAddGames, AddGames>();
+            services.AddTransient<IMatchService, MatchService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
