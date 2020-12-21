@@ -10,11 +10,11 @@
     public class HomeController : BaseController
     {
         private readonly IAddGames addGames;
-        private readonly IMatchService matchService;
+        private readonly MatchService matchService;
 
         public HomeController(
                               IAddGames addGames,
-                              IMatchService matchService)
+                              MatchService matchService)
         {
             this.addGames = addGames;
             this.matchService = matchService;
@@ -57,7 +57,11 @@
                 test += item.AwayTeamResult;
             }
 
-            this.ViewBag.AwayTeamGoals = test / numberOfMatches;
+            if (numberOfMatches != 0)
+            {
+                this.ViewBag.AwayTeamGoals = test / numberOfMatches;
+            }
+
             return this.View(foundTeam);
         }
 

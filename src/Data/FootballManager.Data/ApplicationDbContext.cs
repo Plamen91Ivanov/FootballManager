@@ -32,6 +32,8 @@
 
         public DbSet<Match> Matchs { get; set; }
 
+        public DbSet<MatchesInfo> MatchesInfo { get; set; }
+
 
         public override int SaveChanges() => this.SaveChanges(true);
 
