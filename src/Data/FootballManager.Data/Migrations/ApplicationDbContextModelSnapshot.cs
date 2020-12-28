@@ -265,6 +265,59 @@ namespace FootballManager.Data.Migrations
                     b.ToTable("Matchs");
                 });
 
+            modelBuilder.Entity("FootballManager.Data.Models.MatchesInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AwayTeam")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("AwayTeamCoefficient")
+                        .HasColumnType("float");
+
+                    b.Property<int>("AwayTeamResult")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Draw")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomeTeam")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("HomeTeamCoefficient")
+                        .HasColumnType("float");
+
+                    b.Property<int>("HomeTeamResult")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Winner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("MatchesInfo");
+                });
+
             modelBuilder.Entity("FootballManager.Data.Models.Setting", b =>
                 {
                     b.Property<int>("Id")

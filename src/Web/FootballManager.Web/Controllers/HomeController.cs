@@ -22,6 +22,7 @@
 
         public IActionResult Index()
         {
+           // var addMatchesInfo = this.addGames.AddMatchesInfoAsync();
             //var addGame = this.addGames.AddAsync();
             return this.View();
         }

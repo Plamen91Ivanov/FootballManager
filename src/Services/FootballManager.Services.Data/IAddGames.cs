@@ -5,5 +5,7 @@ namespace FootballManager.Services.Data
     public interface IAddGames
     {
         Task<int> AddAsync();
+
+        Task<int> AddMatchesInfoAsync();
     }
 }
