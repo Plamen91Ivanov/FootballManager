@@ -36,6 +36,9 @@
 
         public DbSet<Teams> Teams { get; set; }
 
+        public DbSet<BulgarianTeams> BulgarianTeams { get; set; }
+
+        public DbSet<BulgarianGames> BulgarianGames { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
