@@ -61,6 +61,28 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<BulgarianTeams>(entity =>
+            {
+                entity.HasKey(t => t.TeamId);
+            });
+
+            builder.Entity<BulgarianGames>(entity =>
+            {
+                entity.HasKey(g => g.GameId);
+
+                entity
+                    .HasOne(g => g.HomeTeam)
+                    .WithMany(t => t.HomeGames)
+                    .HasForeignKey(g => g.HomeTeamId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity
+                    .HasOne(g => g.AwayTeam)
+                    .WithMany(t => t.AwayGames)
+                    .HasForeignKey(g => g.AwayTeamId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

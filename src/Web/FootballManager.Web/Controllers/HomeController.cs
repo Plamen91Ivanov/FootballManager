@@ -2,9 +2,11 @@
 {
     using System.Diagnostics;
     using System.Linq;
+    using FootballManager.Data.Models;
     using FootballManager.Services.Data;
     using FootballManager.Web.ViewModels;
     using FootballManager.Web.ViewModels.Football;
+    using FootballManager.Web.ViewModels.Teams;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
@@ -35,6 +37,16 @@
             };
             return this.View(findedMatch);
 
+        }
+
+        public IActionResult BulgarianTeams()
+        {
+            var foundTeams = new BulgarianTeamsViewModel
+            {
+                BulgarianTeam = this.matchService.GetAllBulgarianTeams<BulgarianTeamViewModel>(),
+            };
+
+            return this.View(foundTeams);
         }
 
         public IActionResult SearchTeam(string name, int numberOfMatches)
