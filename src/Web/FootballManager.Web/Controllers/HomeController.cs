@@ -36,7 +36,6 @@
                 Matches = this.matchService.GetAllMatches<MatchViewModel>(),
             };
             return this.View(findedMatch);
-
         }
 
         public IActionResult BulgarianTeams()
