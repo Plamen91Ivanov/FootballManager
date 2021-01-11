@@ -40,6 +40,12 @@
 
         public DbSet<BulgarianGames> BulgarianGames { get; set; }
 
+        public DbSet<NewTeam> NewTeams { get; set; }
+
+        public DbSet<NewGame> NewGames { get; set; }
+
+        public DbSet<TeamMatch> TeamMatches { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -81,6 +87,30 @@
                     .WithMany(t => t.AwayGames)
                     .HasForeignKey(g => g.AwayTeamId)
                     .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            builder.Entity<NewGame>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+            });
+            builder.Entity<NewTeam>(entity =>
+            {
+                entity.HasKey(x => x.Id);
+            });
+
+            builder.Entity<TeamMatch>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.HasOne(t => t.NewTeam)
+                      .WithMany(te => te.TeamMatches)
+                      .HasForeignKey(t => t.TeamId)
+                      .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(g => g.NewGame)
+                      .WithMany(te => te.TeamMatches)
+                      .HasForeignKey(g => g.GameId)
+                      .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             // Needed for Identity models configuration

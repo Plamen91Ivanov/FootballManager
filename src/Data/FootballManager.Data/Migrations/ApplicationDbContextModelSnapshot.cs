@@ -367,6 +367,51 @@ namespace FootballManager.Data.Migrations
                     b.ToTable("MatchesInfo");
                 });
 
+            modelBuilder.Entity("FootballManager.Data.Models.NewGame", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AwayTeamId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HomeTeamId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PlaingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Result")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WinnerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewGames");
+                });
+
+            modelBuilder.Entity("FootballManager.Data.Models.NewTeam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewTeams");
+                });
+
             modelBuilder.Entity("FootballManager.Data.Models.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -397,6 +442,31 @@ namespace FootballManager.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("FootballManager.Data.Models.TeamMatch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("TeamMatches");
                 });
 
             modelBuilder.Entity("FootballManager.Data.Models.Teams", b =>
@@ -550,6 +620,19 @@ namespace FootballManager.Data.Migrations
                         .WithMany("HomeGames")
                         .HasForeignKey("HomeTeamId")
                         .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FootballManager.Data.Models.TeamMatch", b =>
+                {
+                    b.HasOne("FootballManager.Data.Models.NewGame", "NewGame")
+                        .WithMany("TeamMatches")
+                        .HasForeignKey("GameId")
+                        .IsRequired();
+
+                    b.HasOne("FootballManager.Data.Models.NewTeam", "NewTeam")
+                        .WithMany("TeamMatches")
+                        .HasForeignKey("TeamId")
                         .IsRequired();
                 });
 
